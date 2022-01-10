@@ -15,7 +15,14 @@ app.get('/api/user-access-token', (req, res) => {
 
 
 app.get('/api/data', leanAuth, (req, res) => {
-    res.send(data);
+    let filteredData;
+    const searchString = req.query.search_string;
+    if(searchString) {
+        filteredData = data.filter((item) => item[0].toLowerCase().includes(searchString.toLowerCase()));
+    }else{
+        filteredData = data;
+    }
+    res.send(filteredData);
 })
 
 app.post('/api/data', leanAuth, (req, res) => {
