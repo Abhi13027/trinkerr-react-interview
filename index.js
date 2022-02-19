@@ -1,12 +1,12 @@
 const express = require('express');
 const data = require('./data');
 const dotenv = require('dotenv');
-
+const cors = require('cors');
 dotenv.config();
 const app = express();
 
 app.use(express.json());
-
+app.use(cors());
 const token = process.env.userToken;
 
 app.get('/api/user-access-token', (req, res) => {
